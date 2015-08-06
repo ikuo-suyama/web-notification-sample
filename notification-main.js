@@ -61,7 +61,7 @@ function showCurlCommand(mergedEndpoint) {
     '" --header Content-Type:"application/json" ' + GCM_ENDPOINT +
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
-  curlCommandDiv.textContent = curlCommand;
+  console.log(curlCommand);
 }
 
 function unsubscribe() {
@@ -142,7 +142,7 @@ function subscribe() {
           // and / or gcm_user_visible_only
           window.Demo.debug.log('Unable to subscribe to push.', e);
           pushButton.disabled = false;
-          pushButton.textContent = 'Enable Push Messages';
+          pushButton.textContent = 'Get Sales Information!';
         }
       });
   });
@@ -191,7 +191,7 @@ function initialiseState() {
 
         // Set your UI to show they have subscribed for
         // push messages
-        pushButton.textContent = 'Disable Push Messages';
+        pushButton.textContent = 'Stop Notifications!';
         isPushEnabled = true;
       })
       .catch(function(err) {
