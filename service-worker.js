@@ -3,8 +3,8 @@
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
 
-  var title = 'メッセージを受信しました。';
-  var body = 'We have received a push message. message updated.';
+  var title = 'セール情報！';
+  var body = '○○○○ が今なら30% OFF!! 今すぐチェック→';
   var icon = '/images/icon-192x192.png';
   var tag = 'simple-push-demo-notification-tag';
 
@@ -35,7 +35,7 @@ self.addEventListener('notificationclick', function(event) {
         return client.focus();
     }
     if (clients.openWindow)
-      return clients.openWindow('/web-notification-sample/');
+      return clients.openWindow('/web-notification-sample/sample_detail.html');
   }));
 
 });

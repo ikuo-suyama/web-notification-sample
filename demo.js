@@ -8,6 +8,7 @@ Debug.prototype.log = function() {
   var paragraphElement = document.createElement('p');
   paragraphElement.textContent = Array.prototype.join.call(arguments, '');
   document.querySelector('.js-log').appendChild(paragraphElement);
+  console.log(Array.prototype.join.call(arguments, ''));
 }
 
 window.addEventListener('load', function() {

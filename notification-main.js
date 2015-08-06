@@ -183,6 +183,8 @@ function initialiseState() {
         if (!subscription) {
           // We aren’t subscribed to push, so set UI
           // to allow the user to enable push
+          pushButton.textContent = 'Get Sales Information!';
+
           return;
         }
 
@@ -201,6 +203,7 @@ function initialiseState() {
 }
 
 window.addEventListener('load', function() {
+
   var pushButton = document.querySelector('.js-push-button');
   pushButton.addEventListener('click', function() {
     if (isPushEnabled) {
