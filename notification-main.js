@@ -66,14 +66,31 @@ function showCurlCommand(mergedEndpoint) {
 }
 
 function sendSubscription2Server(subscriptionId) {
-  var request = window.superagent;
-  request
-    .post('https://9hc9dp6jvj.execute-api.us-east-1.amazonaws.com/prod/web-notification-sample-endpoint')
-    .send({'regId' : subscriptionId})
-    .set('x-api-key', 'oRvL869GvA97qYd3iR7bw6TiqNbIAkVU9DW2iEgN')
-    .end(function(err, res){
-      console.log(res.body);
-    });
+  // var request = window.superagent;
+  // request
+  //   .post('https://9hc9dp6jvj.execute-api.us-east-1.amazonaws.com/prod/web-notification-sample-endpoint')
+  //   .send({'regId' : subscriptionId})
+  //   .set('x-api-key', 'oRvL869GvA97qYd3iR7bw6TiqNbIAkVU9DW2iEgN')
+  //   .end(function(err, res){
+  //     console.log(res.body);
+  //   });
+  jQuery.ajax({
+    url: 'https://9hc9dp6jvj.execute-api.us-east-1.amazonaws.com/prod/web-notification-sample-endpoint',
+    cache : false,
+    // TODO Cannot add apikey
+    // headers: {
+    //     'x-api-key':'oRvL869GvA97qYd3iR7bw6TiqNbIAkVU9DW2iEgN'
+    // },
+    // beforeSend: function(xhr) {
+    //   xhr.setRequestHeader("x-api-key", "oRvL869GvA97qYd3iR7bw6TiqNbIAkVU9DW2iEgN");
+    // },
+    method: 'POST',
+    // dataType: 'json',
+    data: JSON.stringify({"regId" : subscriptionId}),
+    success: function(data){
+      console.log('succes: ' , data);
+    }
+  });
 }
 
 function unsubscribe() {
@@ -225,8 +242,8 @@ window.addEventListener('load', function() {
     }
   });
 
-  //TODO
-  sendSubscription2Server('APA91bF-Y8foAtDoSkM2P6T0Yw7s6w01_OS_6_2QnMoFtpmKHFEBXVIedkya8N3HhxN9_mG02bpo4YDHkCj066SUstytAyIJyMh5Ky8udjtQwFVrDErYSYtp7OItGTcRwvkC-xn-A2PXrgeaM_H_Q8NOhtwc3q6-4A');
+  // //TODO
+  // sendSubscription2Server('APA91bF-Y8foAtDoSkM2P6T0Yw7s6w01_OS_6_2QnMoFtpmKHFEBXVIedkya8N3HhxN9_mG02bpo4YDHkCj066SUstytAyIJyMh5Ky8udjtQwFVrDErYSYtp7OItGTcRwvkC-xn-A2PXrgeaM_H_Q8NOhtwc3q6-4A');
 
   // Check that service workers are supported, if so, progressively
   // enhance and add push messaging support, otherwise continue without it.
