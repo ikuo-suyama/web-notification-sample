@@ -1,27 +1,33 @@
 console.log('Loading function');
-var request = require('request');
+var gcm = require('node-gcm');
 
 exports.hander = function(event, context) {
 
-    var options = {
-        uri : 'https://android.googleapis.com/gcm/send',
-        headers: {
-            'Authorization': 'key=AIzaSyBTwceATLKG7hZ0EEwGzJ4OJ88TVi4oAjY',
-            'Content-Type' : 'application/json'
-        },
-        form : {'registration_ids':['APA91bF-Y8foAtDoSkM2P6T0Yw7s6w01_OS_6_2QnMoFtpmKHFEBXVIedkya8N3HhxN9_mG02bpo4YDHkCj066SUstytAyIJyMh5Ky8udjtQwFVrDErYSYtp7OItGTcRwvkC-xn-A2PXrgeaM_H_Q8NOhtwc3q6-4A']},
-        json : true
-    }
-    request.post(
-        options,
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log("success!", body);
-            } else {
-                console.log("error!", body, response.statusCode);
-            }
-        }
-    );
+    var regId = event.regId;
 
+    // Notificationの内容はあくまでWorkerで登録したものとなる
+    var message = new gcm.Message();
+
+    // message.addData('key1', 'msg1');
+
+    var regIds = [regId];
+
+    // Set up the sender with you API key
+    var sender = new gcm.Sender('AIzaSyBTwceATLKG7hZ0EEwGzJ4OJ88TVi4oAjY');
+
+    //Now the sender can be used to send messages
+    sender.send(message, regIds, function (err, result) {
+        if(err) {
+            console.error(err);
+            context.fail();
+        } else {
+            context.succeed();
+        }   console.log(result);
+    });
+
+    // sender.sendNoRetry(message, regIds, function (err, result) {
+    //     if(err) console.error(err);
+    //     else    console.log(result);
+    // });
 };
-exports.hander();
+// exports.hander({'regId' : 'APA91bF-Y8foAtDoSkM2P6T0Yw7s6w01_OS_6_2QnMoFtpmKHFEBXVIedkya8N3HhxN9_mG02bpo4YDHkCj066SUstytAyIJyMh5Ky8udjtQwFVrDErYSYtp7OItGTcRwvkC-xn-A2PXrgeaM_H_Q8NOhtwc3q6-4A'});
