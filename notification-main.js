@@ -67,7 +67,7 @@ function showCurlCommand(mergedEndpoint) {
 function unsubscribe() {
   var pushButton = document.querySelector('.js-push-button');
   pushButton.disabled = true;
-  curlCommandDiv.textContent = '';
+  // curlCommandDiv.textContent = '';
 
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     // To unsubscribe from push messaging, you need get the
