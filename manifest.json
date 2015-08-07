@@ -1,11 +1,18 @@
 {
-  "name": "web-notification-sample",
-  "short_name": "web-notification-sample",
-  "icons": [{
-        "src": "images/icon-192x192.png",
+  "name": "Virtue",
+  "short_name": "Virtue",
+  "icons": [
+    {
+        "src": "./images/icon-192x192.png",
         "sizes": "192x192"
-      }],
-  "start_url": "./index.html?homescreen=1",
+    },
+    {
+      "src": "./images/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+      ],
+  "start_url": "./sample_list.html?homescreen=1",
   "display": "standalone",
   "gcm_sender_id": "518520334931",
   
